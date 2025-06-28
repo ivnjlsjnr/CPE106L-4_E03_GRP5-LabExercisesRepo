@@ -1,35 +1,32 @@
-# stats.py
+# file_navigator.py
 
-def mean(numbers):
-    """Returns the mean (average) of a list of numbers."""
-    if not numbers:
-        return None
-    return sum(numbers) / len(numbers)
+def main():
+    filename = input("Enter the filename: ")
 
+    try:
+        with open(filename, 'r') as file:
+            lines = file.readlines()
+    except FileNotFoundError:
+        print("File not found. Please check the filename and try again.")
+        return
 
-def median(numbers):
-    """Returns the median of a list of numbers."""
-    if not numbers:
-        return None
-    sorted_nums = sorted(numbers)
-    n = len(sorted_nums)
-    mid = n // 2
+    num_lines = len(lines)
+    print(f"\nThe file '{filename}' has {num_lines} lines.")
 
-    if n % 2 == 0:
-        return (sorted_nums[mid - 1] + sorted_nums[mid]) / 2
-    else:
-        return sorted_nums[mid]
+    while True:
+        try:
+            line_number = int(input(f"\nEnter a line number between 1 and {num_lines} (0 to quit): "))
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+            continue
 
+        if line_number == 0:
+            print("Exiting program.")
+            break
+        elif 1 <= line_number <= num_lines:
+            print(f"Line {line_number}: {lines[line_number - 1].rstrip()}")
+        else:
+            print(f"Invalid line number. Please enter a number between 1 and {num_lines}.")
 
-def mode(numbers):
-    """Returns the mode of a list of numbers. If multiple modes, returns the smallest one."""
-    if not numbers:
-        return None
-    frequency = {}
-    for num in numbers:
-        frequency[num] = frequency.get(num, 0) + 1
-
-    max_count = max(frequency.values())
-    modes = [num for num, count in frequency.items() if count == max_count]
-
-    return min(modes)  # Return the smallest mode if multiple
+if __name__ == "__main__":
+    main()
