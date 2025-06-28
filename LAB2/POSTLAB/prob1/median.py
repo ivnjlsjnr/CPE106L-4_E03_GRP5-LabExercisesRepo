@@ -3,7 +3,7 @@ File: median.py
 Prints the median of a set of numbers in a file using stats.py.
 """
 
-from stats import median
+from LAB2.POSTLAB.prob1.stats import median
 
 fileName = input("Enter the file name: ")
 with open(fileName, 'r') as f:

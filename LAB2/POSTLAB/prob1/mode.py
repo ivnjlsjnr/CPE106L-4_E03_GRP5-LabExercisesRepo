@@ -3,7 +3,7 @@ File: mode.py
 Prints the mode of a set of words in a file using stats.py.
 """
 
-from stats import mode
+from LAB2.POSTLAB.prob1.stats import mode
 
 fileName = input("Enter the file name: ")
 with open(fileName, 'r') as f:
