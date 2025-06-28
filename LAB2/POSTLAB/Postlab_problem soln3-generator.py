@@ -1,6 +1,6 @@
 """
 Program: generator.py
-Author: Ken (Modified)
+Author: Kenneth Lambert 
 Generates and displays sentences using a simple grammar
 and vocabulary. Words are chosen at random from external text files.
 """
@@ -9,22 +9,26 @@ import random
 import os
 
 def getWords(filename):
-    """Reads words from a file and returns them as a tuple."""
-    if not os.path.exists(filename):
-        print(f"[Error] File not found: {filename}")
+    """Reads words from a file relative to the script location and returns them as a tuple."""
+    base_path = os.path.dirname(__file__)  # Gets the directory of the script
+    full_path = os.path.join(base_path, filename)
+
+    if not os.path.exists(full_path):
+        print(f"[Error] File not found: {full_path}")
         return ()
-    with open(filename, 'r') as file:
+    
+    with open(full_path, 'r') as file:
         words = [line.strip().upper() for line in file if line.strip()]
     return tuple(words)
 
-# Load vocabulary from files in the same directory
+# Load vocabulary from text files
 articles = getWords("articles.txt")
 nouns = getWords("nouns.txt")
 verbs = getWords("verbs.txt")
 prepositions = getWords("prepositions.txt")
 
 def sentence():
-    """Builds and returns a sentence."""
+    """Builds and returns a complete sentence."""
     return nounPhrase() + " " + verbPhrase()
 
 def nounPhrase():
