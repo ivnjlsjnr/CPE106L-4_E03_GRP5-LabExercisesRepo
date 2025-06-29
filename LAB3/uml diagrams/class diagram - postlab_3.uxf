@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>230</y>
+      <w>320</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>class SavingsAccount
+--
+- name: str
+- pin: str
+- balance: float
++ RATE: float = 0.02
+--
++ __init__(name: str, pin: str, balance: float = 0.0)
++ __str__(): str
++ getBalance(): float
++ getName(): str
++ getPin(): str
++ deposit(amount: float): Optional[str]
++ withdraw(amount: float): Optional[str]
++ computeInterest(): float
++ __lt__(other: SavingsAccount): bool
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>760</x>
+      <y>240</y>
+      <w>360</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>class Bank
+--
+- accounts: Dict[str, SavingsAccount]
+- fileName: Optional[str]
+--
++ __init__(fileName: str = None)
++ __str__(): str
++ makeKey(name: str, pin: str): str
++ add(account: SavingsAccount): None
++ remove(name: str, pin: str): Optional[SavingsAccount]
++ get(name: str, pin: str): Optional[SavingsAccount]
++ computeInterest(): float
++ getKeys(): List[str]
++ save(fileName: str = None): None
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>660</x>
+      <y>330</y>
+      <w>120</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=*
+m2=1
+&lt; manages</panel_attributes>
+    <additional_attributes>10.0;20.0;100.0;20.0</additional_attributes>
+  </element>
+</diagram>
